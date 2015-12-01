@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Peder.MySearch.utils.Utils;
+
 public class Index {
 
 	private MyMap dictionary = new MyMap();
@@ -85,7 +87,7 @@ public class Index {
 				Map<Integer, Integer> value = dictionary.get(word);
 				if (null != value) {
 					//进行降序排序
-					List<Map.Entry<Integer, Integer>> list = Utils.sort(value);
+					List<Map.Entry<Integer, Integer>> list = Utils.sortInt(value);
 					
 					System.out.print(word + ":");
 					// 将检索得到的值进行输出

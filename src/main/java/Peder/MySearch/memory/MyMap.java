@@ -5,9 +5,6 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentNavigableMap;
 
-import org.mapdb.DB;
-import org.mapdb.DBMaker;
-
 public class MyMap implements Serializable {
 	private int size;// 当前容量
 	private static int INIT_CAPACITY = 16;// 默认容量
