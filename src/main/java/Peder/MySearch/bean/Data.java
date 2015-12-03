@@ -7,7 +7,7 @@ public class Data {
 	private String[]keys;
 	private String description;
 	private double score;
-	private String summary;
+	private String text;
 	
 	public String getId() {
 		return id;
@@ -38,6 +38,12 @@ public class Data {
 	}
 	public void setScore(double score) {
 		this.score = score;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
 	}
 	
 }
