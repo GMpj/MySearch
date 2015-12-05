@@ -1,21 +1,22 @@
 package Peder.MySearch.bean;
 
 import java.util.List;
-import java.util.Map;
 
-public class TT{
+public class Result {
+
 	private String key;
-	private List<Map.Entry<String, String>> value;
+	private List<String> value;
 	public String getKey() {
 		return key;
 	}
 	public void setKey(String key) {
 		this.key = key;
 	}
-	public List<Map.Entry<String, String>> getValue() {
+	public List<String> getValue() {
 		return value;
 	}
-	public void setValue(List<Map.Entry<String, String>> value) {
+	public void setValue(List<String> value) {
 		this.value = value;
 	}
+	
 }

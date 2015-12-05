@@ -16,8 +16,14 @@ import net.sf.json.JSONObject;
 
 public class Utils {
 
+	/**
+	 * 分词方法
+	 * 
+	 * @param temp
+	 * @return
+	 */
 	public static List<String> analysis(String temp) {
-		if(null==temp){
+		if (null == temp) {
 			return null;
 		}
 		List<Term> parse = ToAnalysis.parse(temp);
@@ -29,10 +35,23 @@ public class Utils {
 		return list;
 	}
 
+	/**
+	 * 根据权重设置分数
+	 * 
+	 * @param str
+	 *            要解析的文本
+	 * @param map
+	 *            分数集合
+	 * @param weight
+	 *            权重
+	 * @param score
+	 *            分数
+	 * @return
+	 */
 	public static Map<String, Double> setScore(String str,
 			Map<String, Double> map, double weight, Double score) {
 		List<String> words = Utils.analysis(str);
-		if(null==words){
+		if (null == words) {
 			return map;
 		}
 		for (String word : words) {
@@ -46,6 +65,12 @@ public class Utils {
 		return map;
 	}
 
+	/**
+	 * 对map进行排序
+	 * 
+	 * @param value
+	 * @return
+	 */
 	public static List<Map.Entry<Integer, Integer>> sortInt(
 			Map<Integer, Integer> value) {
 		List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(
@@ -64,6 +89,12 @@ public class Utils {
 		return list;
 	}
 
+	/**
+	 * 对map进行排序
+	 * 
+	 * @param value
+	 * @return
+	 */
 	public static List<Map.Entry<String, String>> sortString(
 			Map<String, String> value) {
 		List<Map.Entry<String, String>> list = new ArrayList<Map.Entry<String, String>>(
@@ -83,6 +114,10 @@ public class Utils {
 		return list;
 	}
 
+	/**
+	 * 设置被忽略的分词
+	 * @return
+	 */
 	public static Set<String> getIngore() {
 		Set<String> ingore = new HashSet<String>();
 		ingore.add("的");

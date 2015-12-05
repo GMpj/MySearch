@@ -14,7 +14,6 @@ import org.bson.types.ObjectId;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import Peder.MySearch.bean.Data;
-import Peder.MySearch.bean.TT;
 import Peder.MySearch.bean.Word;
 import Peder.MySearch.dao.DataDao;
 import Peder.MySearch.dao.WordDao;
@@ -64,48 +63,6 @@ public class Test extends TestCase {
 //		}
 	}
 	
-	public void test(){
-		Mongo mongo;
-		try {
-			TT tt=new TT();
-			mongo = new Mongo();
-			DB myMongo = mongo.getDB("myMongo");
-			DBCollection collection = myMongo.getCollection("test");
-//			LinkedHashMap<String, String> map=new LinkedHashMap<String,String>();
-//			map.put("565f0f07ec4947cf33af411b", "111");
-//			map.put("565f0f0bec4947cf33af412a", "222");
-//			List<Map.Entry<String, String>> list = new LinkedList<Map.Entry<String, String>>(
-//					map.entrySet());
-//			
-//			tt.setKey("hihihi");
-//			tt.setValue(list);
-//			JSONObject json = JSONObject.fromObject(tt);
-//			System.out.println(json);
-//			DBObject dbo = (DBObject) JSON.parse(json.toString());
-//			collection.insert(dbo);
-//			DBObject query = new BasicDBObject();
-//			query.put("_id", new ObjectId("566165dd0e564371d68764fb"));
-//			System.out.println(query);
-//			DBCursor cursor = collection.find(query);
-//			DBObject result = cursor.next();
-//			System.out.println(result);
-//			List<Map.Entry<String, String>> list = new LinkedList<Map.Entry<String, String>>();
-//			list=(List<Entry<String, String>>) result.get("value");
-			
-			
-			
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-//		String str1="565f0f0bec4947cf33af412a";
-//		int hash1=str1.hashCode();
-//		String str2="565f0f07ec4947cf33af411b";
-//		int hash2=str2.hashCode();
-//		System.out.println("hash1:"+hash1+",hash2:"+hash2);
-//		System.out.println(hash1<hash2);
-	}
 	
 	
 }

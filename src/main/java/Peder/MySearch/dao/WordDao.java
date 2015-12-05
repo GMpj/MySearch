@@ -39,6 +39,7 @@ public class WordDao {
 			mongo = new Mongo();
 			myMongo = mongo.getDB("myMongo");
 			collection = myMongo.getCollection("word");
+			collection.createIndex(new BasicDBObject("key", 1));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,6 +87,7 @@ public class WordDao {
 	 */
 	public Word find(String word) {
 
+		
 		DBObject query = (DBObject) JSON.parse("{\"key\":\"" + word + "\"}");
 		DBCursor cursor = collection.find(query);
 		if (cursor.hasNext()) {
