@@ -77,7 +77,7 @@ public class DataDao {
 		DBCursor cursor = collection.find(query);
 		DBObject result = cursor.next();
 
-//		System.out.println(result);
+		System.out.println(result);
 //		System.out.println(result.get("_id"));
 		temp.setId(result.get("_id").toString());
 		temp.setTitle((String) result.get("title"));

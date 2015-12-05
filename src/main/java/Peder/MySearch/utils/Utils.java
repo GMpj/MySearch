@@ -114,6 +114,19 @@ public class Utils {
 		return list;
 	}
 
+	public static List<Map.Entry<String, Double>> sortList(List<Map.Entry<String, Double>> list){
+		Comparator<Map.Entry<String, Double>> com = new Comparator<Map.Entry<String, Double>>() {
+
+			public int compare(Map.Entry<String, Double> left,
+					Map.Entry<String, Double> right) {
+
+				return (Double.compare(right.getValue(),left.getValue()));
+			}
+		};
+
+		Collections.sort(list, com);
+		return list;
+	}
 	/**
 	 * 设置被忽略的分词
 	 * @return

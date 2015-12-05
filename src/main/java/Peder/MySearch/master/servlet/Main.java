@@ -16,13 +16,13 @@ public class Main {
 		SlaveService ss=new SlaveService();
 		WordDao wd=WordDao.getInstance();
 		Long startTime = System.currentTimeMillis();
-		ms.getData();
-		
-//		LinkedHashSet<String> temp=ms.getQueryIds("简介");
-//		for(String str:temp){
-//			Data data=ms.getData(str);
-//			
-//		}
+//		ms.getData();
+		List<String> temp=ms.getQueryIds("口才的故事简介（中高级）贾学堂");
+		System.out.println(temp.size());
+		for(String str:temp){
+			Data data=ms.getData(str);
+			
+		}
 //		wd.find("简介");
 		Long endTime = System.currentTimeMillis();
 		System.out.println("所有所花费的时间为：" + (endTime - startTime) + "ms");
