@@ -1,10 +1,12 @@
 package Peder.MySearch.bean;
 
+import java.util.List;
+
 public class Data {
 
 	private String id;
 	private String title;
-	private String[]keys;
+	private List<String> keys;
 	private String description;
 	private double score;
 	private String text;
@@ -21,10 +23,10 @@ public class Data {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String[] getKeys() {
+	public List<String> getKeys() {
 		return keys;
 	}
-	public void setKeys(String[] keys) {
+	public void setKeys(List<String> keys) {
 		this.keys = keys;
 	}
 	public String getDescription() {

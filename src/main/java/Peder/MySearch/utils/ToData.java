@@ -18,7 +18,7 @@ public class ToData {
 
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			DataDao dd=new DataDao();
+			DataDao dd= DataDao.getInstance();
 			while (rs.next()) {
 				Data data = new Data();
 				data.setId(rs.getString("weiboid"));

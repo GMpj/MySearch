@@ -23,12 +23,20 @@ import com.mongodb.Mongo;
 import com.mongodb.util.JSON;
 
 public class WordDao {
-	DB myMongo;
-	DBCollection collection;
+	private DB myMongo;
+	private DBCollection collection;
+	private Mongo mongo;
 
-	public WordDao() {
+	private static final WordDao wd = new WordDao();
+
+	// 静态工厂方法
+	public static WordDao getInstance() {
+		return wd;
+	}
+
+	private WordDao() {
 		try {
-			Mongo mongo = new Mongo();
+			mongo = new Mongo();
 			myMongo = mongo.getDB("myMongo");
 			collection = myMongo.getCollection("word");
 		} catch (UnknownHostException e) {
@@ -47,7 +55,7 @@ public class WordDao {
 	public void save(Word word) {
 
 		JSONObject json = JSONObject.fromObject(word);
-		System.out.println(json);
+//		System.out.println(json);
 		DBObject dbo = (DBObject) JSON.parse(json.toString());
 		collection.insert(dbo);
 	}
@@ -64,6 +72,7 @@ public class WordDao {
 		baseDBO.put("key", word.getKey());
 
 		JSONObject json = JSONObject.fromObject(word);
+//		System.out.println("update:" + json);
 		DBObject newDBO = (DBObject) JSON.parse(json.toString());
 
 		collection.update(baseDBO, newDBO);
@@ -77,15 +86,15 @@ public class WordDao {
 	 */
 	public Word find(String word) {
 
-		DBObject query = (DBObject) JSON
-				.parse("{\"key\":\"" + word + "\"}");
+		DBObject query = (DBObject) JSON.parse("{\"key\":\"" + word + "\"}");
 		DBCursor cursor = collection.find(query);
 		if (cursor.hasNext()) {
 			DBObject result = cursor.next();
-			String key =(String) result.get("key");
-			LinkedHashMap map=(LinkedHashMap) result.get("value");
-			
-			Word temp=new Word();
+			String key = (String) result.get("key");
+			LinkedHashMap<String, String> map = (LinkedHashMap<String, String>) result
+					.get("value");
+
+			Word temp = new Word();
 			temp.setKey(key);
 			temp.setValue(map);
 			return temp;
@@ -98,11 +107,16 @@ public class WordDao {
 
 		while (cursor.hasNext()) {
 			DBObject result = cursor.next();
-			System.out.println(result.get("_id"));
-			System.out.println(result);
+//			System.out.println(result.get("_id"));
+//			System.out.println(result);
 		}
-		System.out.println(collection.getCount());
+//		System.out.println(collection.getCount());
 
 	}
-
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO Auto-generated method stub
+		super.finalize();
+		mongo.close();
+	}
 }
