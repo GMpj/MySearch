@@ -36,11 +36,14 @@ public class WordDao {
 
 	private WordDao() {
 		try {
-			mongo = new Mongo();
-			myMongo = mongo.getDB("myMongo");
+//			mongo = new Mongo();
+//			myMongo = mongo.getDB("myMongo");
+//			myMongo=Dao.getDb();
+			Dao d=Dao.getInstance();
+			myMongo=d.getDb();
 			collection = myMongo.getCollection("word");
 			collection.createIndex(new BasicDBObject("key", 1));
-		} catch (UnknownHostException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

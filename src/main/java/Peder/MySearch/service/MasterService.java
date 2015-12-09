@@ -37,7 +37,7 @@ public class MasterService {
 
 		while (true) {
 			num++;
-			list = dd.find(dataid, 100);
+			list = dd.find(dataid, 1000);
 			// 如果资源全部获取就停止
 			if (list.size() == 0) {
 				break;

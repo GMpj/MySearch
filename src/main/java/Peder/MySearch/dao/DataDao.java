@@ -29,8 +29,7 @@ public class DataDao {
 	private DBCollection collection;
 
 	private Mongo mongo;
-	
-	 
+
 	private static final DataDao dd = new DataDao();
 
 	// 静态工厂方法
@@ -39,14 +38,16 @@ public class DataDao {
 	}
 
 	private DataDao() {
-		
-		try {
-			mongo = new Mongo();
-			myMongo = mongo.getDB("myMongo");
-			collection = myMongo.getCollection("data");
-			
 
-		} catch (UnknownHostException e) {
+		try {
+//			mongo = new Mongo();
+//			myMongo = mongo.getDB("myMongo");
+//			myMongo=Dao.getDb();
+			Dao d=Dao.getInstance();
+			myMongo=d.getDb();
+			collection = myMongo.getCollection("data");
+
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -60,12 +61,11 @@ public class DataDao {
 	 */
 	@Test
 	public void save(Data data) {
-		DataDao dd = new DataDao();
 
 		JSONObject json = JSONObject.fromObject(data);
 		DBObject dbo = (DBObject) JSON.parse(json.toString());
 		collection.insert(dbo);
-		
+
 	}
 
 	public Data find(String id) {
@@ -73,12 +73,12 @@ public class DataDao {
 		Data temp = new Data();
 		DBObject query = new BasicDBObject();
 		query.put("_id", new ObjectId(id));
-//		System.out.println(query);
+		// System.out.println(query);
 		DBCursor cursor = collection.find(query);
 		DBObject result = cursor.next();
 
 		System.out.println(result);
-//		System.out.println(result.get("_id"));
+		// System.out.println(result.get("_id"));
 		temp.setId(result.get("_id").toString());
 		temp.setTitle((String) result.get("title"));
 		temp.setKeys((List<String>) result.get("keywords"));
@@ -103,22 +103,24 @@ public class DataDao {
 		return list;
 	}
 
-	public List<Data> find(String id,int limit) {
+	public List<Data> find(String id, int limit) {
 		List<Data> list = new ArrayList<Data>();
 		DBObject query = new BasicDBObject();
-		
-		query = new BasicDBObject().append("_id",  
-				new BasicDBObject("$gt",  new ObjectId(id)));
+
+		query = new BasicDBObject().append("_id", new BasicDBObject("$gt",
+				new ObjectId(id)));
 		DBCursor cursor = collection.find(query).limit(limit);
-		
+
 		while (cursor.hasNext()) {
 			DBObject result = cursor.next();
-//			System.out.println(result);
+			// System.out.println(result);
 			Data temp = new Data();
 			temp.setId(result.get("_id").toString());
 			temp.setTitle((String) result.get("title"));
 			temp.setKeys((List<String>) result.get("keywords"));
-			temp.setScore((Double) result.get("priority"));
+//			System.out.println(result.get("priority"));
+			
+			temp.setScore(Double.parseDouble((String) result.get("priority").toString()));
 			temp.setDescription((String) result.get("description"));
 			temp.setText((String) result.get("text"));
 			list.add(temp);
@@ -127,11 +129,17 @@ public class DataDao {
 		return list;
 	}
 
-	public String findFirstId(){
+	public String findFirstId() {
 		DBCursor cursor = collection.find().limit(1);
-		DBObject result = cursor.next();
-		return  result.get("_id").toString();
+		System.out.println(cursor);
+		if (cursor.hasNext()) {
+			DBObject result = cursor.next();
+			return result.get("_id").toString();
+		} else {
+			return "";
+		}
 	}
+
 	@Override
 	protected void finalize() throws Throwable {
 		// TODO Auto-generated method stub

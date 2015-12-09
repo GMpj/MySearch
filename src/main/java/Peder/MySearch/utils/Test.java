@@ -1,5 +1,6 @@
 package Peder.MySearch.utils;
 
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,14 +56,21 @@ public class Test extends TestCase {
 		 WordDao wd = WordDao.getInstance();
 		 DataDao dd = DataDao.getInstance();
 		SlaveService ss=new SlaveService();
-		Data data=dd.find("565f0f0bec4947cf33af412a");
-		ss.creatIndex(data);
+//		Data data=dd.find("565f0f0bec4947cf33af412a");
+//		ss.creatIndex(data);
 //		List<Data> list=dd.findAll();
 //		for(Data data:list){
 //			ss.creatIndex(data);
 //		}
 	}
 	
-	
+	public void testSaveStopWord(){
+		try {
+			Utils.saveStopWord();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }
